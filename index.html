@@ -203,8 +203,21 @@ footer a{color:#bcd3cf;text-decoration:none}footer a:hover{color:#fff}
 .reveal.in{opacity:1;transform:none}
 @media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}html{scroll-behavior:auto}}
 </style>
+<!-- Meta Pixel Code -->
+<script>
+  !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+  n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '1007709999047501');
+  fbq('track', 'PageView');
+</script>
+<!-- End Meta Pixel Code -->
 </head>
 <body>
+<noscript><img height="1" width="1" style="display:none" alt=""
+src="https://www.facebook.com/tr?id=1007709999047501&ev=PageView&noscript=1" /></noscript>
 <a class="skip" href="#conteudo">Ir para o conteúdo</a>
 
 <div class="topbar">Agende uma demonstração do Zuarts Conecta pelo WhatsApp · <a class="js-wa" href="#" data-msg="Olá, Eder! Quero agendar uma demonstração do Zuarts Conecta para a minha escola.">(83) 99655-5344</a></div>
@@ -484,6 +497,12 @@ document.querySelectorAll('.js-wa').forEach(a=>{
   const msg = a.dataset.msg || 'Olá, Eder! Quero conhecer o Zuarts Conecta.';
   a.href = 'https://wa.me/' + CONFIG.whatsapp + '?text=' + encodeURIComponent(msg);
   a.target = '_blank'; a.rel = 'noopener';
+  a.addEventListener('click', ()=>{
+    if (typeof window.fbq === 'function') {
+      const event = /demonstração|plano/i.test(msg) ? 'Lead' : 'Contact';
+      window.fbq('track', event, { content_name: 'WhatsApp', content_category: 'Contato comercial' });
+    }
+  });
 });
 document.querySelectorAll('.js-login').forEach(a=> a.href = CONFIG.loginUrl);
 document.getElementById('yr').textContent = new Date().getFullYear();
